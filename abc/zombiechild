@@ -1,0 +1,18 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <signal.h>
+main()
+{
+int fd;
+if((fd=fork())<0)
+{
+printf("error in creating child");
+exit(1);
+}
+if(fd==0)
+kill(getpid(),SIGKILL);
+else
+sleep(2);
+system("ps -f");
+}

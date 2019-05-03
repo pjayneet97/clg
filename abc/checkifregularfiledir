@@ -1,0 +1,28 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<sys/types.h>
+#include<fcntl.h>
+#include<sys/stat.h>
+
+main(int argc, char *argv[])
+{
+struct stat statbuff;
+int check;
+if(argc!=2)
+{
+printf("Can accept only two arguments");
+exit(1);
+}
+check=stat(argv[1], &statbuff);
+if(check==0)
+{
+if(S_ISREG(statbuff.st_mode))
+printf("Regular FIle\n");
+else if(S_ISDIR(statbuff.st_mode))
+printf("Directory\n");
+else if(S_ISCHR(statbuff.st_mode))
+printf("Char Device\n");
+else
+printf("Other File\n");
+}
+}

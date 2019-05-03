@@ -1,0 +1,31 @@
+#include<ctype.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<fcntl.h>
+#include<sys/stat.h>
+#include<error.h>
+#include<ctype.h>
+main(int argc, char *argv[])
+{
+char buff[10][80];
+int i,j;
+char k;
+FILE *fp;
+if(argc!=2)
+{
+fprintf(stderr,"Usage: ./a.out file name\n");
+exit(1);
+}
+fp=fopen(argv[1],"r");
+while(!feof(fp)){
+for(i=0;i<10;i++)
+for(j=0;j<80;j++)
+buff[i][j]='\0';
+for(i=0;i<10;i++)
+fgets(buff[i],80,fp);
+for(i=0;i<10;i++)
+printf("%s",buff[i]);
+scanf("%c", &k);
+}
+fclose(fp);
+}

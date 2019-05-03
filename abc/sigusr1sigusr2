@@ -1,0 +1,38 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<sys/types.h>
+#include<fcntl.h>
+#include<sys/stat.h>
+#include<signal.h>
+#include<unistd.h>
+void fun(int);
+main()
+{
+char a[200];
+if((signal(SIGUSR1,fun))==SIG_ERR)
+{
+printf("Handler not registered\n");
+exit(1);
+}
+if((signal(SIGUSR2,fun))==SIG_ERR)
+{
+printf("Handler not registered\n");
+exit(1);
+}
+while(1)
+pause(); // include <unistd.h>
+}
+void fun(int i)
+{
+if(i==SIGUSR1)
+{
+printf("SIGUSR1 INTRRUPT");
+fflush(NULL);
+}
+else if(i==SIGUSR2)
+{
+printf("SIGUSR2 INTRRUPT");
+fflush(NULL);
+}
+//raise(SIGKILL);
+}
